@@ -53,6 +53,10 @@
     cursor: pointer;
 }
 
+.hero button:hover{
+    background: #b007b0;
+}
+
 .crypto-table{
      max-width: 800px;
      margin: auto;
