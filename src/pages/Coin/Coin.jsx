@@ -29,7 +29,7 @@ const Coin = () => {
       headers: {accept: 'application/json', 'x-cg-demo-api-key': 'CG-JbnXTotEKX7TkJbJ4udYZKMF'}
     };
     
-    fetch(`https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=${currency.name}&days=10`, options)
+    fetch(`https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=${currency.name}&days=10&interval=daily`, options)
       .then(res => res.json())
       .then(res => setHistoricalData(res))
       .catch(err => console.error(err));
@@ -37,9 +37,10 @@ const Coin = () => {
 
   useEffect(()=>{
      fetchCoinData();
+     fetchHistoricalData();
   },[currency])
   
-  if(coinData, historicalData){
+  if(coinData && historicalData){
     return (
       <div className="coin">
           <div className="coin-name">
@@ -47,7 +48,7 @@ const Coin = () => {
              <p><b>{coinData.name} ({coinData.symbol.toUpperCase()})</b></p>
           </div>
           <div className="coin-chart">
-             <LineChart historicalData={historicalData}/>
+             <LineChart historicalData={historicalData} />
           </div>
       </div>
     )  
